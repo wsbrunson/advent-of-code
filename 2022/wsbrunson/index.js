@@ -1,33 +1,38 @@
 const fs = require("fs").promises;
 const path = require("path");
-const { runPuzzle1, runPuzzle2 } = require("./day-1");
+const day1 = require("./day-1");
+const day2 = require("./day-2");
 
-const getInput = (day, input) =>
-  fs.readFile(
-    path.join(__dirname, day, `input-puzzle-${input}.txt`),
-    "utf8",
-    (err, data) => {
-      if (err) {
-        console.error(err);
-        return;
-      }
-
-      return data;
+const getInput = (day) =>
+  fs.readFile(path.join(__dirname, day, `input.txt`), "utf8", (err, data) => {
+    if (err) {
+      console.error(err);
+      return;
     }
-  );
+
+    return data;
+  });
 
 const puzzles = [
   {
     day: "day-1",
     puzzle: 1,
-    input: 1,
-    fn: runPuzzle1,
+    fn: day1.runPuzzle1,
   },
   {
     day: "day-1",
     puzzle: 2,
-    input: 1,
-    fn: runPuzzle2,
+    fn: day1.runPuzzle2,
+  },
+  {
+    day: "day-2",
+    puzzle: 1,
+    fn: day2.runPuzzle1,
+  },
+  {
+    day: "day-2",
+    puzzle: 2,
+    fn: day2.runPuzzle2,
   },
 ];
 
