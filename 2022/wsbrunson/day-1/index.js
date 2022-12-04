@@ -1,3 +1,13 @@
+const {
+  take,
+  sortBy,
+  reverse,
+  sum,
+  head,
+  compose,
+  identity,
+} = require("lodash/fp");
+
 const createListOfCalories = (data) =>
   data
     .split(/\r?\n/)
@@ -23,19 +33,26 @@ const sumListOfCalories = (data) => {
   return sums;
 };
 
+const log = (message) => (data) => {
+  console.log(message, data);
+
+  return data;
+};
+
 module.exports = {
-  runPuzzle1: (data) => {
-    const listOfCalories = createListOfCalories(data);
-    const sums = sumListOfCalories(listOfCalories);
-
-    return sums.reduce((biggest, current) =>
-      current > biggest ? current : biggest
-    );
-  },
-  runPuzzle2: (data) => {
-    const listOfCalories = createListOfCalories(data);
-    const sums = sumListOfCalories(listOfCalories);
-
-    return 0;
-  },
+  runPuzzle1: compose(
+    head,
+    reverse,
+    sortBy(identity),
+    sumListOfCalories,
+    createListOfCalories
+  ),
+  runPuzzle2: compose(
+    sum,
+    take(3),
+    reverse,
+    sortBy(identity),
+    sumListOfCalories,
+    createListOfCalories
+  ),
 };
