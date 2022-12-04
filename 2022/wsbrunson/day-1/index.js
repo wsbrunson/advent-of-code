@@ -1,3 +1,5 @@
+const { take, sortBy, reverse, sum } = require("lodash");
+
 const createListOfCalories = (data) =>
   data
     .split(/\r?\n/)
@@ -36,6 +38,6 @@ module.exports = {
     const listOfCalories = createListOfCalories(data);
     const sums = sumListOfCalories(listOfCalories);
 
-    return 0;
+    return sum(take(reverse(sortBy(sums)), 3));
   },
 };
