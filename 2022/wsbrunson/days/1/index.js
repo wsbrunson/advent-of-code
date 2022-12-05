@@ -39,15 +39,15 @@ const log = (message) => (data) => {
   return data;
 };
 
-module.exports = {
-  runPuzzle1: compose(
+module.exports = [
+  compose(
     head,
     reverse,
     sortBy(identity),
     sumListOfCalories,
     createListOfCalories
   ),
-  runPuzzle2: compose(
+  compose(
     sum,
     take(3),
     reverse,
@@ -55,4 +55,4 @@ module.exports = {
     sumListOfCalories,
     createListOfCalories
   ),
-};
+];

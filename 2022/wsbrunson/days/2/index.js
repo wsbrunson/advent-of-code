@@ -1,5 +1,5 @@
 const { compose, map, words, sum, mapValues, invert } = require("lodash/fp");
-const { splitStringByNewLine } = require("../utilities");
+const { splitStringByNewLine } = require("../../utilities");
 
 const letterToHand = {
   A: "Rock",
@@ -57,14 +57,14 @@ const scoreHand = map(([opponentHand, playerHand]) => {
 
 const mapChoiceToHand = map((choice) => letterToHand[choice]);
 
-module.exports = {
-  runPuzzle1: compose(
+module.exports = [
+  compose(
     sum,
     scoreHand,
     map(compose(mapChoiceToHand, words)),
     splitStringByNewLine
   ),
-  runPuzzle2: compose(
+  compose(
     sum,
     scoreHand,
     map(([opponentChoice, playerChoice]) => {
@@ -78,4 +78,4 @@ module.exports = {
     map(words),
     splitStringByNewLine
   ),
-};
+];

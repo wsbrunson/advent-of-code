@@ -1,5 +1,5 @@
 const { compose, map, sum, chunk } = require("lodash/fp");
-const { splitStringByNewLine } = require("../utilities");
+const { splitStringByNewLine } = require("../../utilities");
 
 const splitString = (string) => [
   string.slice(0, string.length / 2),
@@ -31,28 +31,20 @@ const convertToPriority = (string) => {
 };
 
 module.exports = [
-  {
-    day: "day-3",
-    puzzle: 1,
-    fn: compose(
-      sum,
-      map(convertToPriority),
-      map(findCommonItem),
-      map(map((string) => string.split(""))),
-      map(splitString),
-      splitStringByNewLine
-    ),
-  },
-  {
-    day: "day-3",
-    puzzle: 2,
-    fn: compose(
-      sum,
-      map(convertToPriority),
-      map(findCommonItem),
-      map(map((string) => string.split(""))),
-      chunk(3),
-      splitStringByNewLine
-    ),
-  },
+  compose(
+    sum,
+    map(convertToPriority),
+    map(findCommonItem),
+    map(map((string) => string.split(""))),
+    map(splitString),
+    splitStringByNewLine
+  ),
+  compose(
+    sum,
+    map(convertToPriority),
+    map(findCommonItem),
+    map(map((string) => string.split(""))),
+    chunk(3),
+    splitStringByNewLine
+  ),
 ];
