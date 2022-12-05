@@ -2,6 +2,7 @@ const fs = require("fs").promises;
 const path = require("path");
 const day1 = require("./day-1");
 const day2 = require("./day-2");
+const day3 = require("./day-3");
 
 const getInput = (day) =>
   fs.readFile(path.join(__dirname, day, `input.txt`), "utf8", (err, data) => {
@@ -34,6 +35,7 @@ const puzzles = [
     puzzle: 2,
     fn: day2.runPuzzle2,
   },
+  ...day3,
 ];
 
 const main = async () => {
