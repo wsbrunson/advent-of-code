@@ -17,21 +17,33 @@ with open('d8.in') as f:
 
 print(v)
 
-with open('d8e.in') as f:
+with open('d8.in') as f:
     ssmax = 0
     rs = f.read().splitlines()
     for i, r in enumerate(rs):
-        if i != 0 and i != len(rs) -1:
+        if i != 0 and i != len(rs) - 1:
             for j, t in enumerate(r[1:-1]):
                 tv = int(t)
                 ja = j + 1
-                n = max([k + 1 for k, rt in enumerate(rs[:i]) if int(rt[ja]) < tv], default=1)
-                s = max([k + 1 for k, rt in enumerate(rs[i+1:]) if int(rt[ja]) < tv], default=1)
-                e = max([k + 1 for k, st in enumerate(r[ja+1:]) if int(st) < tv], default=1)
-                w = max([k + 1 for k, st in enumerate(r[:ja]) if int(st) < tv], default=1)
+                n, s, e, w = [1, 1, 1, 1]
+                for k, rt in enumerate(rs[:i][::-1]):
+                    n = k + 1
+                    if int(rt[ja]) >= tv:
+                        break
+                for k, rt in enumerate(rs[i+1:]):
+                    s = k + 1
+                    if int(rt[ja]) >= tv:
+                        break
+                for k, st in enumerate(r[ja+1:]):
+                    e = k + 1
+                    if int(st) >= tv:
+                        break
+                for k, st in enumerate(r[:ja][::-1]):
+                    w = k + 1
+                    if int(st) >= tv:
+                        break
+
                 if (ss := n * s * e * w) > ssmax:
                     ssmax = ss
-
-                print(ja, t, n, s, e, w, ss, ssmax)
 
 print(ssmax)
