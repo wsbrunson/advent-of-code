@@ -15,20 +15,20 @@ module Utils = struct
 
   let list_split_half list = list_split_at (List.length list / 2) list
 
-  let rec take n lst =
-    match lst with
+  let rec take n list =
+    match list with
     | [] -> []
     | head :: taill -> if n <= 0 then [] else head :: take (n - 1) taill
 
-  let rec drop n lst =
-    match lst with
+  let rec drop n list =
+    match list with
     | [] -> []
-    | _head :: taill -> if n <= 0 then lst else drop (n - 1) taill
+    | _head :: taill -> if n <= 0 then list else drop (n - 1) taill
 
-  let rec group_by_size size lst =
-    match lst with
+  let rec group_by_size size list =
+    match list with
     | [] -> []
-    | _ -> take size lst :: group_by_size size (drop size lst)
+    | _ -> take size list :: group_by_size size (drop size list)
 
   let add_list list = List.fold_left ( + ) 0 list
 end
