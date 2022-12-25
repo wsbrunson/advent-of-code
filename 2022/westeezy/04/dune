@@ -1,8 +1,8 @@
 (executable
  (name main)
  (libraries core))
- 
- (env
-  (dev
-    (flags (:standard -warn-error -A))))
 
+(env
+ (dev
+  (flags
+   (:standard -warn-error -A))))

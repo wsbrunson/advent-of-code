@@ -35,4 +35,4 @@ let solve2 list =
 let () =
   let list = Arg.read_arg "input.txt" |> Array.to_list in
   solve1 list |> string_of_int |> print_endline;
-  solve2 list |> string_of_int |> print_endline;
+  solve2 list |> string_of_int |> print_endline
