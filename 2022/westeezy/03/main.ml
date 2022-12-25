@@ -1,4 +1,4 @@
-module Char_Set = Set.Make (Char)
+module CharSet = Set.Make (Char)
 
 (* Made Utils Module as this got a little sloppy *)
 module Utils = struct
@@ -14,11 +14,6 @@ module Utils = struct
       | [] -> ([], [])
 
   let list_split_half list = list_split_at (List.length list / 2) list
-
-  let intersect_char_sets listA listB =
-    let setA = Char_Set.of_list listA in
-    let setB = Char_Set.of_list listB in
-    Char_Set.inter setA setB |> Char_Set.elements
 
   let rec take n lst =
     match lst with
@@ -47,7 +42,9 @@ let prioritie_character c =
 let create_rucksacks line = line |> Utils.explode |> Utils.list_split_half
 
 let find_duplicates_in_rucksack (first, second) =
-  Utils.intersect_char_sets first second
+  let firstSet = CharSet.of_list first in
+  let secondSet = CharSet.of_list second in
+  CharSet.inter firstSet secondSet |> CharSet.elements
 
 let score_duplicates duplicates =
   duplicates |> List.map prioritie_character |> Utils.add_list
@@ -58,10 +55,10 @@ let solve1 list =
   |> List.map score_duplicates |> Utils.add_list
 
 let find_duplicates_in_group list =
-  let setList = List.map Char_Set.of_list list in
+  let setList = List.map CharSet.of_list list in
   setList
-  |> List.fold_left Char_Set.inter (List.hd setList)
-  |> Char_Set.elements
+  |> List.fold_left CharSet.inter (List.hd setList)
+  |> CharSet.elements
 
 (* TODO: I should clean this all up, laziness = many nested lists and lack of sharing of partition logic *)
 let solve2 list =
