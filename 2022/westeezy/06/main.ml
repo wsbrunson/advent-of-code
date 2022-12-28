@@ -33,7 +33,7 @@ let find_marker length list =
   |> ( + ) length
 
 let solve1 list = find_marker 4 list
-let solve2 char_list = find_marker 14 char_list
+let solve2 list = find_marker 14 list
 
 let () =
   let file_string = Utils.read_file_to_string "input.txt" in
