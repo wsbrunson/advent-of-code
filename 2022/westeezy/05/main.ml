@@ -31,13 +31,8 @@ module Utils = struct
   let string_of_char_list char_list =
     String.concat "" (List.map (String.make 1) char_list)
 
-  let reverse list =
-    let rec inner_reverse list =
-      match list with
-      | [] -> []
-      | head :: taill -> inner_reverse taill @ [ head ]
-    in
-    inner_reverse list
+  let rec reverse list =
+    match list with [] -> [] | head :: taill -> reverse taill @ [ head ]
 end
 
 let parse_config contents =
@@ -69,7 +64,6 @@ let parse_instructions contents =
 
 let parse_input input =
   match Str.split (Str.regexp "\n\nmove") input with
-  (* TODO: add back parse_instructions *)
   | [ config; instructions ] ->
       (parse_config config, parse_instructions instructions)
   | _ -> assert false
