@@ -27,7 +27,6 @@ end
 let find_marker length list =
   list |> Utils.tail_listify
   |> List.map (Utils.take length)
-  |> List.filter (fun list -> List.length list = length)
   |> Utils.find_index (fun list ->
          CharSet.cardinal (CharSet.of_list list) = length)
   |> ( + ) length
